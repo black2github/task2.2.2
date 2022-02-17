@@ -3,7 +3,6 @@ package web.config;
 import model.Car;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -14,10 +13,6 @@ import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-import service.CarServiceImpl;
-//import org.hibernate.cfg.Environment;
-
 import javax.sql.DataSource;
 import java.util.Properties;
 
@@ -26,7 +21,7 @@ import java.util.Properties;
 @PropertySource("classpath:db.properties")
 @EnableTransactionManagement
 @ComponentScan(value = {"dao", "model", "service"})
-public class AppConfig /*implements WebMvcConfigurer*/ {
+public class AppConfig {
     protected static Logger log = Logger.getLogger(AppConfig.class.getName());
 
     @Autowired
@@ -54,7 +49,6 @@ public class AppConfig /*implements WebMvcConfigurer*/ {
         props.put("hibernate.hbm2ddl.auto", env.getProperty("hibernate.hbm2ddl.auto"));
 
         props.put("hibernate.dialect", "org.hibernate.dialect.MySQL5Dialect");
-        log.debug("getSessionFactory: hibernate.current_session_context_class = " + props.get("hibernate.current_session_context_class"));
         //props.put("hibernate.current_session_context_class", "thread");
 
         factoryBean.setHibernateProperties(props);

@@ -10,12 +10,14 @@
     <thead>
     <tr>
         <th>Model</th>
+        <th>Series</th>
         <th>PlateNumber</th>
     </tr>
     </thead>
     <tbody>
     <tr th:each="car : ${cars}">
         <td th:text="${car.model}">Car model</td>
+        <td th:text="${car.series}">Car series</td>
         <td th:text="${car.plateNumber}">Car plate number</td>
     </tr>
     </tbody>

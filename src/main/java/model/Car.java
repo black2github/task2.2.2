@@ -41,10 +41,11 @@ public class Car {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Car{id=").append(id).append(", model=").append(model)
+        sb.append("Car{id=").append(id)
+                .append(", model=").append(model)
                 .append(", series=").append(series)
-                .append(", plate=").append(plateNumber).append("}");
+                .append(", plate=").append(plateNumber)
+                .append("}");
         return sb.toString();
     }
-
 }

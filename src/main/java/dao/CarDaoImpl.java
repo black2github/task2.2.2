@@ -13,14 +13,18 @@ import java.util.stream.Collectors;
 public class CarDaoImpl implements CarDao {
     protected static Logger log = Logger.getLogger(CarDaoImpl.class.getName());
 
-    @Autowired
     private SessionFactory sessionFactory;
+
+    @Autowired
+    public CarDaoImpl(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
+    }
 
     @Override
     public List<Car> findAll() {
         log.debug("findAll: <- ");
 
-        TypedQuery<Car> query = sessionFactory.getCurrentSession().createQuery("from Car");
+        TypedQuery<Car> query = sessionFactory.getCurrentSession().createQuery("select c from Car c", Car.class);
         return query.getResultList();
     }
 
@@ -28,7 +32,8 @@ public class CarDaoImpl implements CarDao {
     public List<Car> find(int count) {
         log.debug("find: <- " + count);
 
-        TypedQuery<Car> query = sessionFactory.getCurrentSession().createQuery("from Car");
+        TypedQuery<Car> query = sessionFactory.getCurrentSession()
+                .createQuery("select c from Car c", Car.class);
         return query.getResultList().stream().limit(count).collect(Collectors.toList());
     }
 

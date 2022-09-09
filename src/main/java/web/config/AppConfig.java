@@ -24,8 +24,12 @@ import java.util.Properties;
 public class AppConfig {
     protected static Logger log = Logger.getLogger(AppConfig.class.getName());
 
-    @Autowired
     private Environment env;
+
+    @Autowired
+    public AppConfig(Environment env) {
+        this.env = env;
+    }
 
     @Bean
     public DataSource getDataSource() {
